@@ -1,0 +1,148 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+body {
+  margin: 0;
+  font-family: "Montserrat", sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  /* font-family: "Playfair Display", serif;
+  font-family: "Lora", serif; */
+}
+
+/* Appointment Form */
+
+.go2392553372 {
+  display: block !important;
+}
+
+/* .bg-home {
+  background-image: url("/home-bg.webp");
+} */
+
+.container1 {
+  display: flex;
+  flex-direction: column;
+  max-width: 600px;
+  width: 100%;
+  padding: 15px;
+  background-color: aliceblue;
+  justify-content: center;
+  align-items: center;
+}
+
+.form-group {
+  margin-bottom: 10px;
+  width: 100%;
+}
+
+.form-group label {
+  display: block;
+  margin-bottom: 5px;
+}
+
+.form-group input,
+.form-group textarea {
+  padding: 10px;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+  width: 100%;
+}
+
+.form-group button {
+  padding: 10px;
+  border-radius: 5px;
+  width: 100%;
+  border: 1px solid #ccc;
+  cursor: pointer;
+}
+
+.output {
+  margin-top: 20px;
+  padding: 10px;
+  background-color: #f9f9f9;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  width: 100%;
+}
+
+.buttoncolor {
+  background-color: #1b0e36;
+}
+
+.main-font {
+  color: #1b0e36;
+}
+
+.custom-margin {
+  margin-top: 20px;
+  margin-bottom: 20px;
+}
+
+/* Home Banner */
+
+@keyframes slideDown {
+  0% {
+    transform: translateY(-100%);
+  }
+
+  100% {
+    transform: translateY(0);
+  }
+}
+
+.transition-transform {
+  transition: transform 3000ms ease-in-out;
+}
+
+.slick-next {
+  right: 7px !important;
+}
+
+.slick-prev {
+  left: 7px !important;
+}
+
+.slick-prev,
+.slick-next {
+  background-color: #86efac !important;
+  color: #000 !important;
+  /* border-radius: 50%; */
+  width: 40px !important;
+  height: 40px !important;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 20px;
+  z-index: 1;
+}
+
+.slick-prev:before,
+.slick-next:before {
+  font-size: 20px;
+  color: #000 !important;
+}
+
+.custom-carousel .slick-slide {
+  opacity: 0.5;
+  transform: scale(0.8);
+  transition: transform 0.3s ease, opacity 0.3s ease;
+}
+
+.custom-carousel .slick-center {
+  opacity: 1;
+  transform: scale(1);
+  z-index: 10;
+}
+
+.custom-carousel img {
+  border-radius: 10px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+}
+
+/* gallary section */
+
+.animate-slide {
+  transform: rotateY(360deg);
+}
