@@ -27,21 +27,21 @@ const HomeSlider = () => {
   const slides = [
     {
       id: 1,
-      image: "./banner1.jpg",
+      image: "./banner1.webp",
       title: "Capture Your Special Day, Frame by Frame",
       description:
         "Let us capture the joy, emotions, and love that make your wedding unforgettable. Book your dream photography today!",
     },
     {
       id: 2,
-      image: "./banner2.jpg",
+      image: "./banner2.webp",
       title: "Cinematic Memories of Your Most Beautiful Day",
       description:
         "Turn your wedding day into a timeless cinematic journey, beautifully crafted to reflect your unique love story.",
     },
     {
       id: 3,
-      image: "./banner3.jpg",
+      image: "./banner3.webp",
       title: "Celebrate Your Love with Nature’s Beauty",
       description:
         "Turn your dream outdoor wedding into a reality. Choose from a variety of stunning locations that bring nature’s elegance to your special day.",

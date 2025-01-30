@@ -34,6 +34,7 @@ const Step3 = ({ handleInputChange, formData, error }) => (
       className={`w-full p-2 border ${
         error.phone ? "border-red-500" : "border-gray-300"
       } rounded mb-4`}
+      maxLength={15}
     />
     {error.phone && <p className="text-red-500 text-sm">{error.phone}</p>}
 

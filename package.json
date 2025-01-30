@@ -1,5 +1,6 @@
 {
   "name": "studio",
+  "homepage": "https://photography.thirukadaiyursrilakshmistudio.com/",
   "version": "0.1.0",
   "private": true,
   "dependencies": {

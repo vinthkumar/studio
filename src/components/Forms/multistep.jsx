@@ -19,12 +19,12 @@ const MultistepForm = () => {
   });
 
   const [error, setError] = useState({});
+  const [loading, setLoading] = useState(false);
 
   const disableDevTools = () => {
-    // Disable right-click
     document.addEventListener("contextmenu", (e) => {
       e.preventDefault();
-      alert("Right-click is disabled during form submission.");
+      // alert("Right-click is disabled during form submission.");
     });
 
     document.addEventListener("keydown", (e) => {
@@ -41,7 +41,6 @@ const MultistepForm = () => {
   };
 
   const enableDevTools = () => {
-    // Re-enable right-click
     document.removeEventListener("contextmenu", (e) => {
       e.preventDefault();
     });
@@ -59,31 +58,19 @@ const MultistepForm = () => {
   };
 
   const handleInputChange = (field, value) => {
-    setFormData({
-      ...formData,
-      [field]: value,
-    });
-
-    setError((prevErrors) => ({
-      ...prevErrors,
-      [field]: "",
-    }));
+    setFormData({ ...formData, [field]: value });
+    setError((prevErrors) => ({ ...prevErrors, [field]: "" }));
   };
 
   const nextStep = () => {
     let newError = {};
 
-    // Step 1
     if (currentStep === 1 && !formData.requirements) {
       newError.requirements = "Please select a requirement to proceed.";
     }
-
-    // Step 2
     if (currentStep === 2 && !formData.date) {
       newError.date = "Please select a date to proceed.";
     }
-
-    // Step 3
     if (currentStep === 3) {
       if (!formData.name) newError.name = "Name is required.";
       if (!formData.email) newError.email = "Email is required.";
@@ -104,10 +91,10 @@ const MultistepForm = () => {
   };
 
   const handleFormSubmit = () => {
-    // Disable right-click and developer tools during form submission
+    if (loading) return;
+    setLoading(true);
     disableDevTools();
 
-    // Call EmailJS to send the email
     emailjs
       .send(
         process.env.REACT_APP_EMAILJS_SERVICE_ID,
@@ -116,21 +103,19 @@ const MultistepForm = () => {
         process.env.REACT_APP_EMAILJS_USER_ID
       )
       .then(
-        (response) => {
-          console.log("Email sent successfully:");
+        () => {
+          console.log("Email sent successfully");
+          setLoading(false);
           enableDevTools();
           nextStep();
         },
         (error) => {
           console.error("Error sending email:", error);
+          setLoading(false);
           enableDevTools();
         }
       );
   };
-
-  window.addEventListener("beforeunload", () => {
-    enableDevTools();
-  });
 
   return (
     <div className="flex flex-col items-center justify-start bg-gray-100 min-h-screen pt-2">
@@ -139,10 +124,8 @@ const MultistepForm = () => {
           <img src="/form-image3.png" alt="Form" />
         </div>
         <div className="max-w-6xl mx-auto md:absolute md:center-0 md:top-[370px] shadow-md bg-white p-10 rounded-lg mb-5 flex flex-col">
-          {/* Step Indicator */}
           {currentStep < 5 && <StepIndicator currentStep={currentStep} />}
 
-          {/* Steps Content */}
           <div className="flex-grow">
             {currentStep === 1 && (
               <Step1
@@ -162,19 +145,13 @@ const MultistepForm = () => {
               <Step3
                 formData={formData}
                 handleInputChange={handleInputChange}
-                error={{
-                  name: error.name,
-                  email: error.email,
-                  phone: error.phone,
-                  city: error.city,
-                }}
+                error={error}
               />
             )}
             {currentStep === 4 && <Step4 formData={formData} />}
             {currentStep === 5 && <Step5 />}
           </div>
 
-          {/* Navigation Buttons */}
           {currentStep < 5 && (
             <div className="flex justify-between mt-4">
               {currentStep > 1 && (
@@ -193,8 +170,11 @@ const MultistepForm = () => {
               ) : (
                 <button
                   onClick={handleFormSubmit}
-                  className="bg-green-500 text-white px-4 py-2 rounded hover:bg-green-600">
-                  Book Now
+                  disabled={loading}
+                  className={`bg-green-500 text-white px-4 py-2 rounded hover:bg-green-600 ${
+                    loading ? "opacity-50 cursor-not-allowed" : ""
+                  }`}>
+                  {loading ? "Processing..." : "Book Now"}
                 </button>
               )}
             </div>
